@@ -1,0 +1,23 @@
+{
+  "name": "calculator",
+  "version": "0.1.0",
+  "description": "calculator",
+  "scripts": {
+    "build": "babel src/app.ts --out-dir dist --extensions \".ts\"",
+    "start": "http-server"
+  },
+  "author": "KongWooJwong",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "http-server": "^14.1.1",
+    "typescript": "^4.7.4"
+  }
+}
