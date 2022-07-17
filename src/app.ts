@@ -20,6 +20,8 @@ const calculatorInfo: CalculatorInfo = {
   displayedResult: "",
 };
 
+let isSign = true;
+
 $numberContainer?.addEventListener("click", ({ target }: MouseEvent) => {
   const $button: HTMLButtonElement = target as HTMLButtonElement;
 
@@ -45,6 +47,23 @@ $signContainer?.addEventListener("click", ({ target }: MouseEvent) => {
     calculatorInfo.currentOperand = calculate(calculatorInfo);
     calculatorInfo.previousOperand = currentOperand;
     calculatorInfo.operation = "";
+  } else if (selectedOperation === "%") {
+    calculatorInfo.operation = selectedOperation;
+    calculatorInfo.previousOperand = currentOperand;
+    calculatorInfo.currentOperand = calculate(calculatorInfo);
+  } else if (selectedOperation === "c") {
+    calculatorInfo.currentOperand = "";
+    calculatorInfo.previousOperand = "";
+    calculatorInfo.displayedResult = "";
+    calculatorInfo.operation = "";
+  } else if (selectedOperation === "+/-") {
+    calculatorInfo.currentOperand = isSign
+      ? "-" + currentOperand
+      : currentOperand.slice(1);
+    calculatorInfo.displayedResult = isSign
+      ? "-" + currentOperand
+      : currentOperand.slice(1);
+    isSign = !isSign;
   } else {
     selectOperation(calculatorInfo, $button.innerText);
   }
@@ -100,7 +119,7 @@ function calculate(calculatorInfo: CalculatorInfo): string {
       result = parseFloat(previousOperand) / parseFloat(currentOperand);
       break;
     case "%":
-      console.log("%");
+      result = parseFloat(previousOperand) / 100;
       break;
     default:
       break;
