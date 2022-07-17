@@ -1,11 +1,3 @@
-// const $calculatorResult: HTMLInputElement | null =
-//   document.querySelector(".current-operand");
-
-// const $numberContainer: HTMLDivElement | null =
-//   document.querySelector(".number-container");
-// const $signContainer: HTMLDivElement | null =
-//   document.querySelector(".sign-container");
-
 const $calculatorResult: HTMLDivElement | null =
   document.querySelector(".current-operand");
 
