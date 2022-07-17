@@ -101,9 +101,9 @@ class Calculator {
   }
 
   caculate() {
-    let caculationResult: number;
-    const previousNumber: number = parseFloat(this.previousOperand);
-    const currentNumber: number = parseFloat(this.currentOperand);
+    let caculationResult;
+    const previousNumber = parseFloat(this.previousOperand);
+    const currentNumber = parseFloat(this.currentOperand);
 
     switch (this.operator) {
       case "+":
@@ -122,7 +122,16 @@ class Calculator {
         return;
     }
 
-    this.currentOperand = caculationResult.toString();
+    const isExponential = checkExponentialNumber(caculationResult.toString());
+    let result = "";
+
+    if (isExponential) {
+      result = convertExponentialToFloat(caculationResult.toString());
+    }
+
+    const calcResult = isExponential ? result : caculationResult.toString();
+
+    this.currentOperand = calcResult;
     this.displayedResult = this.currentOperand;
     this.operator = "";
     this.previousOperand = "";
@@ -169,3 +178,37 @@ $signContainer?.addEventListener("click", ({ target }: MouseEvent) => {
 
   calculator.updateDisplay();
 });
+
+function checkExponentialNumber(number: string) {
+  return number.includes("e");
+}
+
+function convertExponentialToFloat(targetNumber: string) {
+  const number: string = targetNumber.split("e")[0];
+  const exponentialNumber = targetNumber.split("e")[1];
+  let result = "";
+
+  if (exponentialNumber[0] === "-") {
+    const fraction = number.replace(".", "");
+    const exponent = parseInt(exponentialNumber.slice(1));
+    let temp = "0.";
+
+    for (let i = 1; i < exponent; i++) {
+      temp += "0";
+    }
+
+    result = temp + fraction;
+  } else if (exponentialNumber[0] === "+") {
+    const fraction = number;
+    const exponent = parseInt(exponentialNumber.slice(1));
+    let temp = "";
+
+    for (let i = 1; i < exponent; i++) {
+      temp += "0";
+    }
+
+    result = fraction + temp;
+  }
+
+  return result;
+}
