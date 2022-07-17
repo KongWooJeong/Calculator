@@ -52,6 +52,8 @@ $signContainer?.addEventListener("click", ({ target }: MouseEvent) => {
   updateDisplay(calculatorInfo);
 });
 
+// module
+
 function selectOperation(
   calculatorInfo: CalculatorInfo,
   selectedOperation: string
@@ -86,16 +88,16 @@ function calculate(calculatorInfo: CalculatorInfo): string {
 
   switch (operation) {
     case "+":
-      result = parseInt(previousOperand) + parseInt(currentOperand);
+      result = parseFloat(previousOperand) + parseFloat(currentOperand);
       break;
     case "-":
-      result = parseInt(previousOperand) - parseInt(currentOperand);
+      result = parseFloat(previousOperand) - parseFloat(currentOperand);
       break;
     case "*":
-      result = parseInt(previousOperand) * parseInt(currentOperand);
+      result = parseFloat(previousOperand) * parseFloat(currentOperand);
       break;
     case "/":
-      result = parseInt(previousOperand) / parseInt(currentOperand);
+      result = parseFloat(previousOperand) / parseFloat(currentOperand);
       break;
     case "%":
       console.log("%");
