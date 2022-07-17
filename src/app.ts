@@ -1,19 +1,39 @@
-const $calculatorResult: HTMLInputElement | null =
-  document.querySelector(".calculator-result");
+// const $calculatorResult: HTMLInputElement | null =
+//   document.querySelector(".current-operand");
 
-const $numberContainer: HTMLDivElement | null =
-  document.querySelector(".number-container");
-const $signContainer: HTMLDivElement | null =
-  document.querySelector(".sign-container");
+// const $numberContainer: HTMLDivElement | null =
+//   document.querySelector(".number-container");
+// const $signContainer: HTMLDivElement | null =
+//   document.querySelector(".sign-container");
+
+const $calculatorResult: HTMLDivElement | null =
+  document.querySelector(".current-operand");
+
+const $numberButtons = document.querySelectorAll(
+  "[data-number]"
+) as NodeListOf<HTMLElement>;
+const $operationButtons = document.querySelectorAll(
+  "[data-operation]"
+) as NodeListOf<HTMLElement>;
+
+const $clearButton: HTMLButtonElement | null =
+  document.querySelector("[data-clear]");
+const $plusMinusSignButton: HTMLButtonElement | null = document.querySelector(
+  "[data-plusMinus-sign]"
+);
+const $percentButton: HTMLButtonElement | null =
+  document.querySelector("[data-percent]");
+const $equalButton: HTMLButtonElement | null =
+  document.querySelector("[data-equal]");
 
 class Calculator {
-  calculatorResultElement: HTMLInputElement | null;
+  calculatorResultElement: HTMLDivElement | null;
   currentOperand: string;
   previousOperand: string;
   operator: string;
   displayedResult: string;
 
-  constructor(calculatorResultElement: HTMLInputElement | null) {
+  constructor(calculatorResultElement: HTMLDivElement | null) {
     this.calculatorResultElement = calculatorResultElement;
     this.currentOperand = "";
     this.previousOperand = "";
@@ -115,7 +135,7 @@ class Calculator {
       case "*":
         caculationResult = previousNumber * currentNumber;
         break;
-      case "/":
+      case "÷":
         caculationResult = previousNumber / currentNumber;
         break;
       default:
@@ -146,36 +166,36 @@ class Calculator {
 
 const calculator = new Calculator($calculatorResult);
 
-$numberContainer?.addEventListener("click", ({ target }: MouseEvent) => {
-  const $button: HTMLButtonElement = target as HTMLButtonElement;
+$numberButtons.forEach(($numberButton) => {
+  $numberButton.addEventListener("click", () => {
+    calculator.selectNubmer($numberButton.innerText);
+    calculator.updateDisplay();
+  });
+});
+$operationButtons.forEach(($operationButton) => {
+  $operationButton.addEventListener("click", () => {
+    calculator.selectOperator($operationButton.innerText);
+    calculator.updateDisplay();
+  });
+});
 
-  if ($button.className === "number-container") {
-    return;
-  }
-
-  calculator.selectNubmer($button.innerText);
+$clearButton?.addEventListener("click", () => {
+  calculator.clear();
   calculator.updateDisplay();
 });
 
-$signContainer?.addEventListener("click", ({ target }: MouseEvent) => {
-  const $button: HTMLButtonElement = target as HTMLButtonElement;
+$plusMinusSignButton?.addEventListener("click", () => {
+  calculator.changePlusMinusSign();
+  calculator.updateDisplay();
+});
 
-  if ($button.className === "sign-container") {
-    return;
-  }
+$percentButton?.addEventListener("click", () => {
+  calculator.setPercent();
+  calculator.updateDisplay();
+});
 
-  if ($button.className === "sign-equal") {
-    calculator.caculate();
-  } else if ($button.className === "sign-clear") {
-    calculator.clear();
-  } else if ($button.className === "sign-plus-minus") {
-    calculator.changePlusMinusSign();
-  } else if ($button.className === "sign-percent") {
-    calculator.setPercent();
-  } else {
-    calculator.selectOperator($button.innerText);
-  }
-
+$equalButton?.addEventListener("click", () => {
+  calculator.caculate();
   calculator.updateDisplay();
 });
 
