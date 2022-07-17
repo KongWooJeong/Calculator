@@ -44,6 +44,7 @@ $signContainer?.addEventListener("click", ({ target }: MouseEvent) => {
   if (selectedOperation === "=") {
     calculatorInfo.currentOperand = calculate(calculatorInfo);
     calculatorInfo.previousOperand = currentOperand;
+    calculatorInfo.operation = "";
   } else {
     selectOperation(calculatorInfo, $button.innerText);
   }
