@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-  </head>
-  <body>
-    <div>
-      <input type="text" name="input" class="calculator-result">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link href="./styles/style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="calculator-grid">
+    <div class="output">
+      <div data-current-operand class="current-operand"></div>
     </div>
-    <br />
-    <div class="number-container">
-      <button type="button" class="number-one">1</button>
-      <button type="button" class="number-two">2</button>
-      <button type="button" class="number-three">3</button>
-      <button type="button" class="number-four">4</button>
-      <button type="button" class="number-five">5</button>
-      <button type="button" class="number-six">6</button>
-      <button type="button" class="number-seven">7</button>
-      <button type="button" class="number-eight">8</button>
-      <button type="button" class="number-nine">9</button>
-      <button type="button" class="number-zero">0</button>
-      <button type="button" class="sign-dot">.</button>
-    </div>
-    <br />
-    <div class="sign-container">
-      <button type="button" class="sign-clear">c</button>
-      <button type="button" class="sign-plus-minus">+/-</button>
-      <button type="button" class="sign-percent">%</button>
-      <button type="button" class="sign-division">/</button>
-      <button type="button" class="sign-multiplication">*</button>
-      <button type="button" class="sign-minus">-</button>
-      <button type="button" class="sign-plus">+</button>
-      <button type="button" class="sign-equal">=</button>
-    </div>
-    <script src="./dist/app.js"></script>
-  </body>
+    <button type="button" data-clear>C</button>
+    <button type="button" data-plusMinus-sign>+/-</button>
+    <button type="button" data-delete>%</button>
+    <button type="button" data-operation>÷</button>
+    <button type="button" data-number>7</button>
+    <button type="button" data-number>8</button>
+    <button type="button" data-number>9</button>
+    <button type="button" data-operation>*</button>
+    <button type="button" data-number>4</button>
+    <button type="button" data-number>5</button>
+    <button type="button" data-number>6</button>
+    <button type="button" data-operation>-</button>
+    <button type="button" data-number>1</button>
+    <button type="button" data-number>2</button>
+    <button type="button" data-number>3</button>
+    <button type="button" data-operation>+</button>
+    <button type="button" data-number class="span-two">0</button>
+    <button type="button" data-number>.</button>
+    <button type="button" data-equal>=</button>
+  </div>
+  <script src="./dist/app.js"></script>
+</body>
 </html>
