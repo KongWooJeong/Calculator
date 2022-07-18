@@ -176,27 +176,26 @@ describe("Caculator setPercent method testing", () => {
   test("Check whether the setPercent function works", () => {
     const mockDivElement = document.createElement("div");
 
-    const mockCalculate = (Calculator.prototype.caculate = jest.fn());
     const calculator = new Calculator(mockDivElement);
+
+    jest.spyOn(calculator, "caculate");
 
     calculator.currentOperand = "1";
     calculator.setPercent();
 
-    expect(calculator.operator).toBe("÷");
-    expect(calculator.previousOperand).toBe("1");
-    expect(calculator.currentOperand).toBe("100");
-    expect(mockCalculate).toHaveBeenCalled();
+    expect(calculator.caculate).toHaveBeenCalled();
   });
 
   test("Check if the setPercent function does not work if the current operand does not exist", () => {
     const mockDivElement = document.createElement("div");
 
-    const mockCalculate = (Calculator.prototype.caculate = jest.fn());
     const calculator = new Calculator(mockDivElement);
+
+    jest.spyOn(calculator, "caculate");
 
     calculator.setPercent();
 
-    expect(mockCalculate).toHaveBeenCalledTimes(0);
+    expect(calculator.caculate).toHaveBeenCalledTimes(0);
   });
 });
 
@@ -240,16 +239,86 @@ describe("Caculator changePlusMinusSign method testing", () => {
 
     const calculator = new Calculator(mockDivElement);
 
-    calculator.displayedResult = "1";
+    calculator.displayedResult = "10";
 
     calculator.changePlusMinusSign();
 
-    expect(calculator.displayedResult).toBe("-1");
-    expect(calculator.previousOperand).toBe("-1");
+    expect(calculator.displayedResult).toBe("-10");
+    expect(calculator.previousOperand).toBe("-10");
 
     calculator.changePlusMinusSign();
 
-    expect(calculator.displayedResult).toBe("1");
-    expect(calculator.previousOperand).toBe("1");
+    expect(calculator.displayedResult).toBe("10");
+    expect(calculator.previousOperand).toBe("10");
+  });
+});
+
+describe("Caculator calculate method testing", () => {
+  test("Check for + operator", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.previousOperand = "20";
+    calculator.currentOperand = "2";
+    calculator.operator = "+";
+
+    calculator.caculate();
+
+    expect(calculator.currentOperand).toBe("22");
+    expect(calculator.displayedResult).toBe("22");
+    expect(calculator.operator).toBe("");
+    expect(calculator.previousOperand).toBe("");
+  });
+
+  test("Check for - operator", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.previousOperand = "20";
+    calculator.currentOperand = "2";
+    calculator.operator = "-";
+
+    calculator.caculate();
+
+    expect(calculator.currentOperand).toBe("18");
+    expect(calculator.displayedResult).toBe("18");
+    expect(calculator.operator).toBe("");
+    expect(calculator.previousOperand).toBe("");
+  });
+
+  test("Check for * operator", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.previousOperand = "20";
+    calculator.currentOperand = "2";
+    calculator.operator = "*";
+
+    calculator.caculate();
+
+    expect(calculator.currentOperand).toBe("40");
+    expect(calculator.displayedResult).toBe("40");
+    expect(calculator.operator).toBe("");
+    expect(calculator.previousOperand).toBe("");
+  });
+
+  test("Check for ÷ operator", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.previousOperand = "20";
+    calculator.currentOperand = "2";
+    calculator.operator = "÷";
+
+    calculator.caculate();
+
+    expect(calculator.currentOperand).toBe("10");
+    expect(calculator.displayedResult).toBe("10");
+    expect(calculator.operator).toBe("");
+    expect(calculator.previousOperand).toBe("");
   });
 });
