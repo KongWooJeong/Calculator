@@ -1,8 +1,8 @@
-function checkExponentialNumber(number: string) {
+function checkExponentialNumber(number: string): boolean {
   return number.includes("e");
 }
 
-function convertExponentialToFloat(targetNumber: string) {
+function convertExponentialToFloat(targetNumber: string): string {
   const targetNumberArray: string[] = targetNumber.split("e");
   const fractionNumber: string = targetNumberArray[0];
   const exponentialNumber: string = targetNumberArray[1];
