@@ -96,8 +96,8 @@ class Calculator {
 
   caculate() {
     let caculationResult: number;
-    const previousNumber = parseFloat(this.previousOperand);
-    const currentNumber = parseFloat(this.currentOperand);
+    const previousNumber: number = parseFloat(this.previousOperand);
+    const currentNumber: number = parseFloat(this.currentOperand);
 
     switch (this.operator) {
       case "+":
@@ -116,14 +116,18 @@ class Calculator {
         return;
     }
 
-    const isExponential = checkExponentialNumber(caculationResult.toString());
+    const isExponential: boolean = checkExponentialNumber(
+      caculationResult.toString()
+    );
     let result = "";
 
     if (isExponential) {
       result = convertExponentialToFloat(caculationResult.toString());
     }
 
-    const calcResult = isExponential ? result : caculationResult.toString();
+    const calcResult: string = isExponential
+      ? result
+      : caculationResult.toString();
 
     this.currentOperand = calcResult;
     this.displayedResult = this.currentOperand;

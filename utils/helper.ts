@@ -4,12 +4,12 @@ function checkExponentialNumber(number: string) {
 
 function convertExponentialToFloat(targetNumber: string) {
   const number: string = targetNumber.split("e")[0];
-  const exponentialNumber = targetNumber.split("e")[1];
+  const exponentialNumber: string = targetNumber.split("e")[1];
   let result = "";
 
   if (exponentialNumber[0] === "-") {
-    const fraction = number.replace(".", "");
-    const exponent = parseInt(exponentialNumber.slice(1));
+    const fraction: string = number.replace(".", "");
+    const exponent: number = parseInt(exponentialNumber.slice(1));
     let temp = "0.";
 
     for (let i = 1; i < exponent; i++) {
@@ -18,8 +18,8 @@ function convertExponentialToFloat(targetNumber: string) {
 
     result = temp + fraction;
   } else if (exponentialNumber[0] === "+") {
-    const fraction = number;
-    const exponent = parseInt(exponentialNumber.slice(1));
+    const fraction: string = number;
+    const exponent: number = parseInt(exponentialNumber.slice(1));
     let temp = "";
 
     for (let i = 1; i < exponent; i++) {

@@ -20,15 +20,15 @@ const $percentButton: HTMLButtonElement | null =
 const $equalButton: HTMLButtonElement | null =
   document.querySelector("[data-equal]");
 
-const calculator = new Calculator($calculatorResult);
+const calculator: Calculator = new Calculator($calculatorResult);
 
-$numberButtons.forEach(($numberButton) => {
+$numberButtons.forEach(($numberButton: HTMLElement) => {
   $numberButton.addEventListener("click", () => {
     calculator.selectNumber($numberButton.innerText);
     calculator.updateDisplay();
   });
 });
-$operationButtons.forEach(($operationButton) => {
+$operationButtons.forEach(($operationButton: HTMLElement) => {
   $operationButton.addEventListener("click", () => {
     calculator.selectOperator($operationButton.innerText);
     calculator.updateDisplay();
