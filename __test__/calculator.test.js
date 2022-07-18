@@ -151,3 +151,23 @@ describe("Calculator updateDisplay method testing", () => {
     expect(mockDivElement.innerText).toBe("10");
   });
 });
+
+describe("Calculator clear method testing", () => {
+  test("Check if all properties are initialized", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.currentOperand = "1";
+    calculator.operator = "+";
+    calculator.previousOperand = "1";
+    calculator.displayedResult = "3";
+
+    calculator.clear();
+
+    expect(calculator.currentOperand).toBe("");
+    expect(calculator.previousOperand).toBe("");
+    expect(calculator.operator).toBe("");
+    expect(calculator.displayedResult).toBe("0");
+  });
+});
