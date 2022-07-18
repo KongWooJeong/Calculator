@@ -171,3 +171,31 @@ describe("Calculator clear method testing", () => {
     expect(calculator.displayedResult).toBe("0");
   });
 });
+
+describe("Caculator setPercent method testing", () => {
+  test("Check whether the setPercent function works", () => {
+    const mockDivElement = document.createElement("div");
+
+    const mockCalculate = (Calculator.prototype.caculate = jest.fn());
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.currentOperand = "1";
+    calculator.setPercent();
+
+    expect(calculator.operator).toBe("÷");
+    expect(calculator.previousOperand).toBe("1");
+    expect(calculator.currentOperand).toBe("100");
+    expect(mockCalculate).toHaveBeenCalled();
+  });
+
+  test("Check if the setPercent function does not work if the current operand does not exist", () => {
+    const mockDivElement = document.createElement("div");
+
+    const mockCalculate = (Calculator.prototype.caculate = jest.fn());
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.setPercent();
+
+    expect(mockCalculate).toHaveBeenCalledTimes(0);
+  });
+});
