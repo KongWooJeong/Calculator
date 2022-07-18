@@ -199,3 +199,57 @@ describe("Caculator setPercent method testing", () => {
     expect(mockCalculate).toHaveBeenCalledTimes(0);
   });
 });
+
+describe("Caculator changePlusMinusSign method testing", () => {
+  test("Check when the current operand does not exist or is 0 and the result displayed on the screen is 0", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.changePlusMinusSign();
+
+    expect(calculator.displayedResult).toBe("0");
+    expect(calculator.currentOperand).toBe("");
+
+    calculator.currentOperand = "0";
+
+    expect(calculator.displayedResult).toBe("0");
+    expect(calculator.currentOperand).toBe("0");
+  });
+
+  test("Check if the current operand exists", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.currentOperand = "1";
+
+    calculator.changePlusMinusSign();
+
+    expect(calculator.currentOperand).toBe("-1");
+    expect(calculator.displayedResult).toBe("-1");
+
+    calculator.changePlusMinusSign();
+
+    expect(calculator.currentOperand).toBe("1");
+    expect(calculator.displayedResult).toBe("1");
+  });
+
+  test("Check if the current operand exists and the result displayed on the current screen is not 0, That is, when selecting an operator after selecting a number", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.displayedResult = "1";
+
+    calculator.changePlusMinusSign();
+
+    expect(calculator.displayedResult).toBe("-1");
+    expect(calculator.previousOperand).toBe("-1");
+
+    calculator.changePlusMinusSign();
+
+    expect(calculator.displayedResult).toBe("1");
+    expect(calculator.previousOperand).toBe("1");
+  });
+});
