@@ -1,4 +1,4 @@
-import Calculator from "../utils/calculator";
+import { Calculator } from "../utils/calculator";
 
 const $calculatorResult: HTMLDivElement | null =
   document.querySelector(".current-operand");
@@ -24,7 +24,7 @@ const calculator = new Calculator($calculatorResult);
 
 $numberButtons.forEach(($numberButton) => {
   $numberButton.addEventListener("click", () => {
-    calculator.selectNubmer($numberButton.innerText);
+    calculator.selectNumber($numberButton.innerText);
     calculator.updateDisplay();
   });
 });
