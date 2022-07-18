@@ -1,7 +1,7 @@
 import { Calculator } from "../utils/calculator";
 
 const $calculatorResult: HTMLDivElement | null =
-  document.querySelector(".current-operand");
+  document.querySelector(".calculator-result");
 
 const $numberButtons = document.querySelectorAll(
   "[data-number]"
