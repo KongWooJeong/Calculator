@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Calculator from "../utils/calculator";
+import { Calculator } from "../utils/calculator";
 
 describe("Calculator selectNumber method testing", () => {
   test("Check when a number is entered", () => {
@@ -80,5 +80,61 @@ describe("Calculator selectNumber method testing", () => {
 
     expect(calculator.currentOperand).toBe("2.11");
     expect(calculator.displayedResult).toBe("2.11");
+  });
+});
+
+describe("Calculator selectOperator method testing", () => {
+  test("Check if the current operand and previous operand does not exist", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    jest.spyOn(calculator, "caculate");
+
+    calculator.selectOperator("+");
+    calculator.selectOperator("-");
+    calculator.selectOperator("*");
+    calculator.selectOperator("÷");
+
+    expect(calculator.caculate).toHaveBeenCalledTimes(0);
+    expect(calculator.operator).toBe("");
+    expect(calculator.previousOperand).toBe("");
+    expect(calculator.currentOperand).toBe("");
+  });
+
+  test("Check if current operand exists and previous operand does not exist", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    jest.spyOn(calculator, "caculate");
+
+    calculator.currentOperand = "1";
+
+    calculator.selectOperator("+");
+
+    expect(calculator.caculate).toHaveBeenCalledTimes(0);
+    expect(calculator.operator).toBe("+");
+    expect(calculator.previousOperand).toBe("1");
+    expect(calculator.currentOperand).toBe("");
+  });
+
+  test("Check if current operand exists, previous operand, operator exist", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    jest.spyOn(calculator, "caculate");
+
+    calculator.currentOperand = "1";
+    calculator.operator = "+";
+    calculator.previousOperand = "1";
+
+    calculator.selectOperator("-");
+
+    expect(calculator.caculate).toHaveBeenCalled();
+    expect(calculator.operator).toBe("-");
+    expect(calculator.previousOperand).toBe("2");
+    expect(calculator.currentOperand).toBe("");
   });
 });
