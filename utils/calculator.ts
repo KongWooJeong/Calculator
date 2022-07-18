@@ -1,6 +1,6 @@
 import { checkExponentialNumber, convertExponentialToFloat } from "./helper";
 
-export default class Calculator {
+class Calculator {
   calculatorResultElement: HTMLDivElement | null;
   currentOperand: string;
   previousOperand: string;
@@ -27,7 +27,7 @@ export default class Calculator {
       return;
     }
 
-    this.operator = "/";
+    this.operator = "÷";
     this.previousOperand = this.currentOperand;
     this.currentOperand = "100";
 
@@ -58,7 +58,7 @@ export default class Calculator {
     this.displayedResult = this.currentOperand;
   }
 
-  selectNubmer(number: string) {
+  selectNumber(number: string) {
     if (number === "." && this.currentOperand.includes(".")) {
       return;
     }
@@ -95,7 +95,7 @@ export default class Calculator {
   }
 
   caculate() {
-    let caculationResult;
+    let caculationResult: number;
     const previousNumber = parseFloat(this.previousOperand);
     const currentNumber = parseFloat(this.currentOperand);
 
@@ -137,3 +137,5 @@ export default class Calculator {
     }
   }
 }
+
+export { Calculator };
