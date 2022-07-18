@@ -138,3 +138,16 @@ describe("Calculator selectOperator method testing", () => {
     expect(calculator.currentOperand).toBe("");
   });
 });
+
+describe("Calculator updateDisplay method testing", () => {
+  test("Check if the result is shown on the screen", () => {
+    const mockDivElement = document.createElement("div");
+
+    const calculator = new Calculator(mockDivElement);
+
+    calculator.displayedResult = "10";
+    calculator.updateDisplay();
+
+    expect(mockDivElement.innerText).toBe("10");
+  });
+});
